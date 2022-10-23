@@ -3,7 +3,7 @@ tags:
 get:
   description: init
 parameters:
-  - name: id
+  - name: tweet_keberapa
     in: path
     required: true
     type: string
