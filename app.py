@@ -200,7 +200,7 @@ def addOne():
 @app.route('/lang/<id>', methods=['PUT'])
 def editOne(id):
     tweet = {'tweet': request.json['tweet']}
-    id = int(id)
+    id = int(id)-1
     # df_get = df.filter(items=[id], axis=0)
 
     if id in df['id'].tolist():
@@ -208,13 +208,14 @@ def editOne(id):
 
         json = frame(df)
 
-        json = json[id]
+        # json = json[id]
+        print(json)
         df_upd = pd.DataFrame.from_dict(json, orient='index')
         print('df_upd aman')
         print(df_upd)
         df_upd.to_sql('mytable', conn, if_exists='replace', index=False)
         print('df.to_sql aman')
-        sql1 = '''TRUNCATE OR IGNORE data50 fix FROM mytable '''
+        sql1 = '''DELETE FROM data50'''
         sql2 = '''INSERT OR IGNORE INTO data50(tweet, fix) SELECT tweet, fix FROM mytable'''
         cur = conn.cursor()
         print('conn.cursor aman')
@@ -265,7 +266,7 @@ def removeOne(id):
 
 ###############################################################################################################
 
-# files = {'formData': ('test.csv', open('test.csv','rb'), 'text/x-spam')}
+# UPLOAD
 
 @swag_from("docs/lang_upload.yml", methods=['POST'])
 @app.route('/langs/', methods=['POST'])
