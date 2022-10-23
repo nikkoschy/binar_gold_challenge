@@ -105,6 +105,25 @@ def returnAll():
 
     json = frame(df)
 
+    df_upd = pd.DataFrame.from_dict(json, orient='index')
+    print('df_upd aman')
+    print(df_upd)
+    df_upd.to_sql('mytable', conn, if_exists='replace', index=False)
+    print('df.to_sql aman')
+    sql1 = '''TRUNCATE OR IGNORE data50 fix FROM mytable '''
+    sql2 = '''INSERT OR IGNORE INTO data50(tweet, fix) SELECT tweet, fix FROM mytable'''
+    cur = conn.cursor()
+    print('conn.cursor aman')
+    cur.execute(sql1)
+    print('execute sql1 aman')
+    cur.execute(sql2)
+    print('execute sql2 aman')
+    conn.commit()
+    print('commit aman')
+    conn.close()
+    print('close aman')
+    print(df_raw)
+
     return jsonify(json)
 
 ###############################################################################################################
@@ -115,6 +134,24 @@ def returnOne(id):
     id = int(id)+1
     df_get = df.filter(items=[id], axis=0)
     json = frame(df_get)
+    df_upd = pd.DataFrame.from_dict(json, orient='index')
+    print('df_upd aman')
+    print(df_upd)
+    df_upd.to_sql('mytable', conn, if_exists='replace', index=False)
+    print('df.to_sql aman')
+    sql1 = '''TRUNCATE OR IGNORE data50 fix FROM mytable '''
+    sql2 = '''INSERT OR IGNORE INTO data50(tweet, fix) SELECT tweet, fix FROM mytable'''
+    cur = conn.cursor()
+    print('conn.cursor aman')
+    cur.execute(sql1)
+    print('execute sql1 aman')
+    cur.execute(sql2)
+    print('execute sql2 aman')
+    conn.commit()
+    print('commit aman')
+    conn.close()
+    print('close aman')
+    print(df_raw)
     return jsonify(json)
 
 ###############################################################################################################
@@ -131,8 +168,7 @@ def addOne():
     json = json[id]
     print(json)
     
-    # df_upd = pd.DataFrame.from_dict(json, orient='columns')
-    # df_upd = pd.DataFrame.from_dict(json, orient='index')
+
     df_upd = pd.DataFrame(pd.Series(json)).T 
     print('df_upd aman')
     print(df_upd)
@@ -168,6 +204,24 @@ def editOne(id):
         json = frame(df)
 
         json = json[id]
+        df_upd = pd.DataFrame.from_dict(json, orient='index')
+        print('df_upd aman')
+        print(df_upd)
+        df_upd.to_sql('mytable', conn, if_exists='replace', index=False)
+        print('df.to_sql aman')
+        sql1 = '''TRUNCATE OR IGNORE data50 fix FROM mytable '''
+        sql2 = '''INSERT OR IGNORE INTO data50(tweet, fix) SELECT tweet, fix FROM mytable'''
+        cur = conn.cursor()
+        print('conn.cursor aman')
+        cur.execute(sql1)
+        print('execute sql1 aman')
+        cur.execute(sql2)
+        print('execute sql2 aman')
+        conn.commit()
+        print('commit aman')
+        conn.close()
+        print('close aman')
+        print(df_raw)
 
         return jsonify(json)
     else :
@@ -184,6 +238,25 @@ def removeOne(id):
     df = df.drop(id)
 
     json = frame(df)
+
+    df_upd = pd.DataFrame.from_dict(json, orient='index')
+    print('df_upd aman')
+    print(df_upd)
+    df_upd.to_sql('mytable', conn, if_exists='replace', index=False)
+    print('df.to_sql aman')
+    sql1 = '''TRUNCATE OR IGNORE data50 fix FROM mytable '''
+    sql2 = '''INSERT OR IGNORE INTO data50(tweet, fix) SELECT tweet, fix FROM mytable'''
+    cur = conn.cursor()
+    print('conn.cursor aman')
+    cur.execute(sql1)
+    print('execute sql1 aman')
+    cur.execute(sql2)
+    print('execute sql2 aman')
+    conn.commit()
+    print('commit aman')
+    conn.close()
+    print('close aman')
+    print(df_raw)
 
     return jsonify(json)
 
@@ -239,7 +312,7 @@ def post():
     sql2 = '''INSERT OR IGNORE INTO data50(tweet, fix) SELECT tweet, fix FROM mytable'''
     cur = conn.cursor()
     print('conn.cursor aman')
-    # cur.execute(sql1)
+    cur.execute(sql1)
     print('execute sql1 aman')
     cur.execute(sql2)
     print('execute sql2 aman')
