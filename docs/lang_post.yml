@@ -1,0 +1,21 @@
+tags:
+  - name: Tambah_Tweet
+get:
+  description: {"tweet" : "isi tweet"}
+parameters:
+  - name: tweet
+    in: body
+    required: true
+    schema: 
+      type: object
+      required:
+        name: 
+          type: string
+responses:
+    '200':
+      description: Successful response
+    '400':
+      description: Bad Request
+    '500':
+      description: Internal Server Error
+    
